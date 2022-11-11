@@ -1,0 +1,29 @@
+:root {
+    --gridSquareSize: 80px;
+}
+
+#board {
+    display: grid;
+    grid-auto-flow: row;
+    column-gap: 2px;
+}
+
+.row {
+    display: grid;
+    height: var(--gridSquareSize);
+    grid-template-columns: repeat(8, var(--gridSquareSize));
+    column-gap: 0px;
+}
+
+.white {
+    background-color: rgba(197, 196, 196, 0.384);
+}
+
+.black {
+    background-color: rgba(22, 21, 21, 0.541);
+}
+
+.piece {
+    height: var(--gridSquareSize);
+    width: var(--gridSquareSize);
+}
