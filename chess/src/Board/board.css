@@ -1,5 +1,6 @@
 :root {
     --gridSquareSize: 80px;
+    --chess-piece-size: 60px;
 }
 
 #board {
@@ -16,14 +17,22 @@
 }
 
 .white {
-    background-color: rgba(197, 196, 196, 0.384);
+    background-color: rgba(196, 197, 197, 0.384);
 }
 
 .black {
-    background-color: rgba(22, 21, 21, 0.541);
+    background-color: rgba(56, 55, 55, 0.541);
 }
 
 .piece {
     height: var(--gridSquareSize);
     width: var(--gridSquareSize);
+}
+
+.chess-piece {
+    width: 100%;
+    height: 100%;
+    font-size: var(--chess-piece-size);
+    
+    text-align: center;
 }
