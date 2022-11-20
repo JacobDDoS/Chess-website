@@ -42,6 +42,7 @@
 }
 
 .canMoveTo > span {
+    position: absolute;
     height: 22px;
     width: 22px;
     background-color: rgba(0, 128, 0, 0.603);

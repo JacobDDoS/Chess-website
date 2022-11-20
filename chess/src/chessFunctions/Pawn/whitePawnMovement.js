@@ -1,9 +1,9 @@
-import { convertRowColToChessPosition } from "../helpers/convertColRowToChessPosition";
-
 export const whitePawnMovement = (board, col, row) => {
   const positionsItCanGoTo = [];
   // console.log("white pawn at raw position: " + col + " " + row);
   // console.log(board[row][col]);
+
+  
   //Check one above
   if (board[row-1][col] === 0) {
     positionsItCanGoTo.push([row-1, col]);

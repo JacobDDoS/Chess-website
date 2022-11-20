@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { chessBoardContext } from '../App'
 import { findPossibleMovements } from '../chessFunctions/findPossibleMovements'
-import { whitePawnMovement } from '../chessFunctions/whitePawnMovement'
 import { convertColRowToChessPosition } from '../helpers/convertColRowToChessPosition'
 import { invertRow } from '../helpers/invertRow'
 

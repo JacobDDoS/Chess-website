@@ -58,3 +58,17 @@ export const chessBoardStart = [
     [whiteAPawn, whiteBPawn, whiteCPawn, whiteDPawn, whiteEPawn, whiteFPawn, whiteGPawn, whiteHPawn],
     [whiteARook, whiteBKnight, whiteBlackBishop, whiteQueen, whiteKing, whiteWhiteBishop, whiteGKnight, whiteHRook]
 ]
+
+
+// For testing the Knights
+// export const chessBoardStart = [
+//     [0, 0, 0, 0, 0, 0, 0, 0],
+//     [0, 0, 0, 0, 0, 0, 0, 0],
+//     [0, 0, blackCPawn, 0, blackBKnight, 0, 0, 0],
+//     [0, 0, 0, 0, 0, 0, 0, 0],
+//     [0, 0, 0, whiteBKnight, 0, 0, 0, 0],
+//     [0, 0, 0, 0, 0, 0, 0, 0],
+//     [0, 0, 0, 0, 0, 0, 0, 0],
+//     [0, 0, 0, 0, 0, 0, 0, 0]
+// ]
+

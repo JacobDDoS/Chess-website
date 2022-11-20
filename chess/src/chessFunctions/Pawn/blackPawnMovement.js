@@ -1,5 +1,3 @@
-import { convertRowColToChessPosition } from "../helpers/convertColRowToChessPosition";
-
 export const blackPawnMovement = (board, col, row) => {
   const positionsItCanGoTo = [];
 //   console.log("black pawn at raw position: " + col + " " + row);
