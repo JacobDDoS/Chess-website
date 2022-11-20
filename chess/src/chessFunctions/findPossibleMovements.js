@@ -2,9 +2,11 @@ import { convertChessPositionToRowCol } from "../helpers/convertChessPositionToR
 import { convertColRowToChessPosition } from "../helpers/convertColRowToChessPosition";
 import { invertRow } from "../helpers/invertRow";
 import { bishopMovement } from "./Bishop/bishopMovement";
-import { knightMovement, whiteKnightMovement } from "./Knight/knightMovement";
+import { knightMovement } from "./Knight/knightMovement";
 import { blackPawnMovement } from "./Pawn/blackPawnMovement";
 import { whitePawnMovement } from "./Pawn/whitePawnMovement";
+import { queenMovement } from "./Queen/queenMovement";
+import { rookMovement } from "./Rook/rookMovement";
 
 const getMovementsFromRawPositions = (rawPositions) => {
     const movements = [];
@@ -47,6 +49,26 @@ export const findPossibleMovements = (board, position) => {
             rawPositions = bishopMovement(board, col-1, row, "black");
         } else {
             rawPositions = bishopMovement(board, col-1, row, "white");
+        }
+
+    }
+    else if (pieceAtThatPosition && pieceAtThatPosition.id.endsWith("Rook")) {
+
+        //Rooks
+        if (pieceAtThatPosition.color === "white") {
+            rawPositions = rookMovement(board, col-1, row, "black");
+        } else {
+            rawPositions = rookMovement(board, col-1, row, "white");
+        }
+
+    }
+    else if (pieceAtThatPosition && pieceAtThatPosition.id.endsWith("Queen")) {
+
+        //Queens
+        if (pieceAtThatPosition.color === "white") {
+            rawPositions = queenMovement(board, col-1, row, "black");
+        } else {
+            rawPositions = queenMovement(board, col-1, row, "white");
         }
 
     }

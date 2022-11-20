@@ -48,16 +48,16 @@ const whiteGPawn = new Piece (1, "White_g_Pawn", "white");
 const whiteHPawn = new Piece (1, "White_h_Pawn", "white");
 
 
-// export const chessBoardStart = [
-//     [blackARook, blackBKnight, blackWhiteBishop, blackQueen, blackKing, blackBlackBishop, blackGKnight, blackHRook],
-//     [blackAPawn, blackBPawn, blackCPawn, blackDPawn, blackEPawn, blackFPawn, blackGPawn, blackHPawn],
-//     [0, 0, 0, 0, 0, 0, 0, 0],
-//     [0, 0, 0, 0, 0, 0, 0, 0],
-//     [0, 0, 0, 0, 0, 0, 0, 0],
-//     [0, 0, 0, 0, 0, 0, 0, 0],
-//     [whiteAPawn, whiteBPawn, whiteCPawn, whiteDPawn, whiteEPawn, whiteFPawn, whiteGPawn, whiteHPawn],
-//     [whiteARook, whiteBKnight, whiteBlackBishop, whiteQueen, whiteKing, whiteWhiteBishop, whiteGKnight, whiteHRook]
-// ]
+export const chessBoardStart = [
+    [blackARook, blackBKnight, blackWhiteBishop, blackQueen, blackKing, blackBlackBishop, blackGKnight, blackHRook],
+    [blackAPawn, blackBPawn, blackCPawn, blackDPawn, blackEPawn, blackFPawn, blackGPawn, blackHPawn],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [whiteAPawn, whiteBPawn, whiteCPawn, whiteDPawn, whiteEPawn, whiteFPawn, whiteGPawn, whiteHPawn],
+    [whiteARook, whiteBKnight, whiteBlackBishop, whiteQueen, whiteKing, whiteWhiteBishop, whiteGKnight, whiteHRook]
+]
 
 
 // For testing the Knights
@@ -72,14 +72,27 @@ const whiteHPawn = new Piece (1, "White_h_Pawn", "white");
 //     [0, 0, 0, 0, 0, 0, 0, 0]
 // ]
 
-//For testing the bishops
-export const chessBoardStart = [
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, blackQueen, 0],
-    [0, 0, blackCPawn, 0, blackBKnight, 0, 0, 0],
-    [0, 0, blackARook, 0, 0, 0, 0, 0],
-    [0, 0, 0, whiteBlackBishop, blackWhiteBishop, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, whiteAPawn, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0]
-]
+// //For testing the bishops
+// export const chessBoardStart = [
+//     [0, 0, 0, 0, 0, 0, 0, 0],
+//     [0, 0, 0, 0, 0, 0, blackQueen, 0],
+//     [0, 0, blackCPawn, 0, blackBKnight, 0, 0, 0],
+//     [0, 0, blackARook, 0, 0, 0, 0, 0],
+//     [0, 0, 0, whiteBlackBishop, blackWhiteBishop, 0, 0, 0],
+//     [0, 0, 0, 0, 0, 0, 0, 0],
+//     [0, 0, whiteAPawn, 0, 0, 0, 0, 0],
+//     [0, 0, 0, 0, 0, 0, 0, 0]
+// ]
+
+
+//For testing the rooks
+// export const chessBoardStart = [
+//     [blackARook, 0, 0, 0, 0, 0, 0, 0],
+//     [0, 0, 0, 0, 0, 0, 0, 0],
+//     [0, 0, 0, 0, 0, 0, 0, 0],
+//     [0, 0, 0, blackHRook, 0, 0, whiteBlackBishop, whiteQueen],
+//     [0, 0, 0, 0, whiteARook, 0, 0, 0],
+//     [0, 0, 0, 0, 0, 0, 0, 0],
+//     [0, 0, 0, 0, 0, 0, 0, 0],
+//     [0, 0, 0, 0, 0, 0, 0, whiteHRook]
+// ]
