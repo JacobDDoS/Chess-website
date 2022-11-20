@@ -1,3 +1,6 @@
+import { invertRow } from "./invertRow";
+
+//Given the chess position (such as a6 or e2), return the column and row where it is found (as stored in the 2D array)
 export const convertChessPositionToRowCol = (position) => {
     const alpha = "abcdefgh";
     let col;
@@ -7,5 +10,5 @@ export const convertChessPositionToRowCol = (position) => {
             break;
         }
     }
-    return [col, position[1]-'0'];
+    return [col, invertRow(position[1]-'0')];
 }

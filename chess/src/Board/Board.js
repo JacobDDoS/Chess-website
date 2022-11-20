@@ -57,14 +57,17 @@ const Board = () => {
         <div id="board">
           {
             chessBoardState.map((row, rowIdx)=> {
-              return <div className='row'>
+              return <div className='row' key={rowIdx}>
                 {
                   row.map((piece, colIdx) => {
-                    return <span className={`piece ${(rowIdx+colIdx)%2===0 ? 'white' : 'black'}`} id={`${convertColRowToChessPosition(colIdx, invertRow(rowIdx))}`}
-                      onClick={()=> {
-                        if (piece) {setSelectedPosition(convertColRowToChessPosition(colIdx, invertRow(rowIdx)));}
-                        else {setSelectedPosition("")}
-                      }}
+                    return <span 
+                                className={`piece ${(rowIdx+colIdx)%2===0 ? 'white' : 'black'}`} 
+                                id={`${convertColRowToChessPosition(colIdx, invertRow(rowIdx))}`}
+                                key={`${convertColRowToChessPosition(colIdx, invertRow(rowIdx))}`}
+                                onClick={()=> {
+                                  if (piece) {setSelectedPosition(convertColRowToChessPosition(colIdx, invertRow(rowIdx)));}
+                                  else {setSelectedPosition("")}
+                                }}
                     >
                       <span></span>
                       {

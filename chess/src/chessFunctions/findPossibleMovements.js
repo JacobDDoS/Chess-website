@@ -1,6 +1,7 @@
 import { convertChessPositionToRowCol } from "../helpers/convertChessPositionToRowCol"
 import { convertColRowToChessPosition } from "../helpers/convertColRowToChessPosition";
 import { invertRow } from "../helpers/invertRow";
+import { bishopMovement } from "./Bishop/bishopMovement";
 import { knightMovement, whiteKnightMovement } from "./Knight/knightMovement";
 import { blackPawnMovement } from "./Pawn/blackPawnMovement";
 import { whitePawnMovement } from "./Pawn/whitePawnMovement";
@@ -15,33 +16,40 @@ const getMovementsFromRawPositions = (rawPositions) => {
 
 export const findPossibleMovements = (board, position) => {
     const [col, row] = convertChessPositionToRowCol(position);
-    const pieceAtThatPosition = board[invertRow(row)][col-1];
-    // console.log(pieceAtThatPosition);
-
+    const pieceAtThatPosition = board[row][col-1];
+    let rawPositions = [];
 
     //Logic for different pieces
-    let possibleChessPositions = [];
     if (pieceAtThatPosition && pieceAtThatPosition.id.endsWith("Pawn")) {
+        
+        //Pawns
         if (pieceAtThatPosition.color === "white") {
-            //White Pawn
-            const rawPositions = whitePawnMovement(board, col-1, invertRow(row));
-            possibleChessPositions = getMovementsFromRawPositions(rawPositions);
+            rawPositions = whitePawnMovement(board, col-1, row);
         } else {
-            //Black Pawn
-            const rawPositions = blackPawnMovement(board, col-1, invertRow(row));
-            possibleChessPositions = getMovementsFromRawPositions(rawPositions);
+            rawPositions = blackPawnMovement(board, col-1, row);
         }
-    } else if (pieceAtThatPosition && pieceAtThatPosition.id.endsWith("Knight")) {
+
+    } 
+    else if (pieceAtThatPosition && pieceAtThatPosition.id.endsWith("Knight")) {
+
+        //Knights
         if (pieceAtThatPosition.color === "white") {
-            const rawPositions = knightMovement(board, col-1, invertRow(row), "black");
-            possibleChessPositions = getMovementsFromRawPositions(rawPositions);
+            rawPositions = knightMovement(board, col-1, row, "black");
         } else {
-            const rawPositions = knightMovement(board, col-1, invertRow(row), "white");
-            possibleChessPositions = getMovementsFromRawPositions(rawPositions);
+            rawPositions = knightMovement(board, col-1, row, "white");
         }
+
+    } 
+    else if (pieceAtThatPosition && pieceAtThatPosition.id.endsWith("Bishop")) {
+
+        //Bishops
+        if (pieceAtThatPosition.color === "white") {
+            rawPositions = bishopMovement(board, col-1, row, "black");
+        } else {
+            rawPositions = bishopMovement(board, col-1, row, "white");
+        }
+
     }
 
-
-    // console.log(possibleChessPositions);
-    return possibleChessPositions;
+    return getMovementsFromRawPositions(rawPositions);
 }
