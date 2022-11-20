@@ -30,7 +30,7 @@ const Board = () => {
     clearBoardOfClass("selectedPosition");
     
     if (selectedPosition) {
-      console.log("selectedPosition: " + selectedPosition);
+      // console.log("selectedPosition: " + selectedPosition);
       document.getElementById(selectedPosition).classList.add("selectedPosition");
 
       setPositionsSelectedPieceCanMoveTo(findPossibleMovements(chessBoardState, selectedPosition));
@@ -45,7 +45,7 @@ const Board = () => {
     if (positionsSelectedPieceCanMoveTo && positionsSelectedPieceCanMoveTo.length > 0) {
       for (let i=0;i<positionsSelectedPieceCanMoveTo.length;i++) {
         const position = positionsSelectedPieceCanMoveTo[i];
-        console.log("position it can move to: " + position);
+        // console.log("position it can move to: " + position);
         document.getElementById(position).classList.add("canMoveTo");
       }
     }
@@ -61,9 +61,9 @@ const Board = () => {
               return <div className='row'>
                 {
                   row.map((piece, colIdx) => {
-                    return <span className={`piece ${(rowIdx+colIdx)%2===0 ? 'white' : 'black'}`} id={`${convertColRowToChessPosition(colIdx+1, invertRow(rowIdx))}`}
+                    return <span className={`piece ${(rowIdx+colIdx)%2===0 ? 'white' : 'black'}`} id={`${convertColRowToChessPosition(colIdx, invertRow(rowIdx))}`}
                       onClick={()=> {
-                        if (piece) {setSelectedPosition(convertColRowToChessPosition(colIdx+1, invertRow(rowIdx)));}
+                        if (piece) {setSelectedPosition(convertColRowToChessPosition(colIdx, invertRow(rowIdx)));}
                         else {setSelectedPosition("")}
                       }}
                     >
