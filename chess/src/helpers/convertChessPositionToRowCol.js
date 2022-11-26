@@ -6,7 +6,7 @@ export const convertChessPositionToRowCol = (position) => {
     let col;
     for (let i=0;i<alpha.length;i++) {
         if (position[0] === alpha[i]) {
-            col = i+1;
+            col = i;
             break;
         }
     }

@@ -1,12 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { chessBoardContext } from '../App'
 import { findPossibleMovements } from '../chessFunctions/findPossibleMovements'
+import { convertChessPositionToRowCol } from '../helpers/convertChessPositionToRowCol'
 import { convertColRowToChessPosition } from '../helpers/convertColRowToChessPosition'
 import { invertRow } from '../helpers/invertRow'
 
 import "./board.css"
 
-const Board = () => {
+const Board = ({isWhitesTurn, setIsWhitesTurn}) => {
   const startingChessBoardState = useContext(chessBoardContext);
   const [selectedPosition, setSelectedPosition] = useState();
   const [chessBoardState, setChessBoardState] = useState(startingChessBoardState);
@@ -26,8 +27,10 @@ const Board = () => {
 
   useEffect(()=>{
     //Remove selectedPosition from previously selectedPosition if it exists
+    //And all the spots it can move to
     clearBoardOfClass("selectedPosition");
-    
+    setPositionsSelectedPieceCanMoveTo([]);
+
     if (selectedPosition) {
       // console.log("selectedPosition: " + selectedPosition);
       document.getElementById(selectedPosition).classList.add("selectedPosition");
@@ -50,7 +53,7 @@ const Board = () => {
     }
   }, [positionsSelectedPieceCanMoveTo])
 
-  // console.log(chessBoardState);
+  console.log(isWhitesTurn);
   return (
     <div>
         <h2>Chess Board:</h2>
@@ -65,7 +68,26 @@ const Board = () => {
                                 id={`${convertColRowToChessPosition(colIdx, invertRow(rowIdx))}`}
                                 key={`${convertColRowToChessPosition(colIdx, invertRow(rowIdx))}`}
                                 onClick={()=> {
-                                  if (piece) {setSelectedPosition(convertColRowToChessPosition(colIdx, invertRow(rowIdx)));}
+                                  //Check if it is a spot a piece can move
+                                  const posToCheckFor = positionsSelectedPieceCanMoveTo;
+                                  const chessPos = convertColRowToChessPosition(colIdx, invertRow(rowIdx));
+                                  if (posToCheckFor.includes(chessPos)) {
+                                    const [prevCol, prevRow] = convertChessPositionToRowCol(selectedPosition);
+                                    console.log("selectedPosition: " + selectedPosition + " row, col: " + prevRow + ", " + prevCol)
+                                    //Check if it is a valid move - TO DO LATER
+
+                                    //Move piece
+                                    const copy = chessBoardState[prevRow][prevCol];
+                                    const stateOfBoard = chessBoardState;
+                                    stateOfBoard[prevRow][prevCol] = 0;
+                                    stateOfBoard[rowIdx][colIdx] = copy;
+
+                                    setSelectedPosition("");
+                                    setIsWhitesTurn(!isWhitesTurn);
+                                    setChessBoardState([...stateOfBoard]);
+                                    
+                                  }
+                                  else if (piece && piece.color === (isWhitesTurn ? "white" : "black")) {setSelectedPosition(convertColRowToChessPosition(colIdx, invertRow(rowIdx)));}
                                   else {setSelectedPosition("")}
                                 }}
                     >

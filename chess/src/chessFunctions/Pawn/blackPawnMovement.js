@@ -9,7 +9,7 @@ export const blackPawnMovement = (board, col, row) => {
   }
 
   //Check two below (and that it's on row 1 (this is the same as row 7 in the actual board))
-  if (board[row+2][col] === 0 && row === 1) {
+  if (row === 1 && board[row+2][col] === 0) {
     positionsItCanGoTo.push([row+2, col]);
   } 
 

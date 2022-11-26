@@ -18,7 +18,7 @@ const getMovementsFromRawPositions = (rawPositions) => {
 
 export const findPossibleMovements = (board, position) => {
     const [col, row] = convertChessPositionToRowCol(position);
-    const pieceAtThatPosition = board[row][col-1];
+    const pieceAtThatPosition = board[row][col];
     let rawPositions = [];
 
     //Logic for different pieces
@@ -26,9 +26,9 @@ export const findPossibleMovements = (board, position) => {
         
         //Pawns
         if (pieceAtThatPosition.color === "white") {
-            rawPositions = whitePawnMovement(board, col-1, row);
+            rawPositions = whitePawnMovement(board, col, row);
         } else {
-            rawPositions = blackPawnMovement(board, col-1, row);
+            rawPositions = blackPawnMovement(board, col, row);
         }
 
     } 
@@ -36,9 +36,9 @@ export const findPossibleMovements = (board, position) => {
 
         //Knights
         if (pieceAtThatPosition.color === "white") {
-            rawPositions = knightMovement(board, col-1, row, "black");
+            rawPositions = knightMovement(board, col, row, "black");
         } else {
-            rawPositions = knightMovement(board, col-1, row, "white");
+            rawPositions = knightMovement(board, col, row, "white");
         }
 
     } 
@@ -46,9 +46,9 @@ export const findPossibleMovements = (board, position) => {
 
         //Bishops
         if (pieceAtThatPosition.color === "white") {
-            rawPositions = bishopMovement(board, col-1, row, "black");
+            rawPositions = bishopMovement(board, col, row, "black");
         } else {
-            rawPositions = bishopMovement(board, col-1, row, "white");
+            rawPositions = bishopMovement(board, col, row, "white");
         }
 
     }
@@ -56,9 +56,9 @@ export const findPossibleMovements = (board, position) => {
 
         //Rooks
         if (pieceAtThatPosition.color === "white") {
-            rawPositions = rookMovement(board, col-1, row, "black");
+            rawPositions = rookMovement(board, col, row, "black");
         } else {
-            rawPositions = rookMovement(board, col-1, row, "white");
+            rawPositions = rookMovement(board, col, row, "white");
         }
 
     }
@@ -66,9 +66,9 @@ export const findPossibleMovements = (board, position) => {
 
         //Queens
         if (pieceAtThatPosition.color === "white") {
-            rawPositions = queenMovement(board, col-1, row, "black");
+            rawPositions = queenMovement(board, col, row, "black");
         } else {
-            rawPositions = queenMovement(board, col-1, row, "white");
+            rawPositions = queenMovement(board, col, row, "white");
         }
 
     }

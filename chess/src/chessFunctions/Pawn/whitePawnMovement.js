@@ -10,7 +10,7 @@ export const whitePawnMovement = (board, col, row) => {
   }
 
   //Check two above (and that it's on row 6)
-  if (board[row-2][col] === 0 && row === 6) {
+  if (row === 6 && board[row-2][col] === 0) {
     positionsItCanGoTo.push([row-2, col]);
   } 
 
