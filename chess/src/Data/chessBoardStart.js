@@ -48,16 +48,16 @@ const whiteGPawn = new Piece (1, "White_g_Pawn", "white");
 const whiteHPawn = new Piece (1, "White_h_Pawn", "white");
 
 
-// export const chessBoardStart = [
-//     [blackARook, blackBKnight, blackWhiteBishop, blackQueen, blackKing, blackBlackBishop, blackGKnight, blackHRook],
-//     [blackAPawn, blackBPawn, blackCPawn, blackDPawn, blackEPawn, blackFPawn, blackGPawn, blackHPawn],
-//     [0, 0, 0, 0, 0, 0, 0, 0],
-//     [0, 0, 0, 0, 0, 0, 0, 0],
-//     [0, 0, 0, 0, 0, 0, 0, 0],
-//     [0, 0, 0, 0, 0, 0, 0, 0],
-//     [whiteAPawn, whiteBPawn, whiteCPawn, whiteDPawn, whiteEPawn, whiteFPawn, whiteGPawn, whiteHPawn],
-//     [whiteARook, whiteBKnight, whiteBlackBishop, whiteQueen, whiteKing, whiteWhiteBishop, whiteGKnight, whiteHRook]
-// ]
+export const chessBoardStart = [
+    [blackARook, blackBKnight, blackWhiteBishop, blackQueen, blackKing, blackBlackBishop, blackGKnight, blackHRook],
+    [blackAPawn, blackBPawn, blackCPawn, blackDPawn, blackEPawn, blackFPawn, blackGPawn, blackHPawn],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [whiteAPawn, whiteBPawn, whiteCPawn, whiteDPawn, whiteEPawn, whiteFPawn, whiteGPawn, whiteHPawn],
+    [whiteARook, whiteBKnight, whiteBlackBishop, whiteQueen, whiteKing, whiteWhiteBishop, whiteGKnight, whiteHRook]
+]
 
 
 // For testing the Knights
@@ -98,13 +98,13 @@ const whiteHPawn = new Piece (1, "White_h_Pawn", "white");
 // ]
 
 //For testing checks
-export const chessBoardStart = [
-    [whiteKing, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, blackQueen, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, whiteQueen, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, blackKing]
-]
+// export const chessBoardStart = [
+//     [whiteKing, 0, 0, 0, 0, 0, 0, 0],
+//     [0, 0, 0, 0, 0, 0, 0, 0],
+//     [0, 0, 0, 0, blackQueen, 0, 0, 0],
+//     [0, 0, 0, 0, 0, 0, 0, 0],
+//     [0, 0, 0, 0, 0, 0, 0, 0],
+//     [0, 0, 0, 0, 0, 0, 0, 0],
+//     [0, whiteQueen, 0, 0, 0, 0, 0, 0],
+//     [0, 0, 0, 0, 0, 0, 0, blackKing]
+// ]

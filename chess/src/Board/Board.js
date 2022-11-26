@@ -36,7 +36,7 @@ const Board = ({isWhitesTurn, setIsWhitesTurn}) => {
       // console.log("selectedPosition: " + selectedPosition);
       document.getElementById(selectedPosition).classList.add("selectedPosition");
 
-      setPositionsSelectedPieceCanMoveTo(findPossibleMovements(chessBoardState, selectedPosition));
+      setPositionsSelectedPieceCanMoveTo(findPossibleMovements(chessBoardState, selectedPosition, isWhitesTurn ? "white" : "black"));
     }
   }, [selectedPosition])
 
@@ -95,7 +95,7 @@ const Board = ({isWhitesTurn, setIsWhitesTurn}) => {
                                   const chessPos = convertColRowToChessPosition(colIdx, invertRow(rowIdx));
                                   if (posToCheckFor.includes(chessPos)) {
                                     const [prevCol, prevRow] = convertChessPositionToRowCol(selectedPosition);
-                                    console.log("selectedPosition: " + selectedPosition + " row, col: " + prevRow + ", " + prevCol)
+                                    // console.log("selectedPosition: " + selectedPosition + " row, col: " + prevRow + ", " + prevCol)
                                     //Check if it is a valid move - TO DO LATER
 
                                     //Move piece
