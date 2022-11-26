@@ -4,6 +4,7 @@ import { findPossibleMovements } from '../chessFunctions/findPossibleMovements'
 import { convertChessPositionToRowCol } from '../helpers/convertChessPositionToRowCol'
 import { convertColRowToChessPosition } from '../helpers/convertColRowToChessPosition'
 import { invertRow } from '../helpers/invertRow'
+import { isInCheck } from '../helpers/isInCheck'
 
 import "./board.css"
 
@@ -53,7 +54,28 @@ const Board = ({isWhitesTurn, setIsWhitesTurn}) => {
     }
   }, [positionsSelectedPieceCanMoveTo])
 
-  console.log(isWhitesTurn);
+  const [isWhiteInCheck, whiteKingChessPosition] = isInCheck(chessBoardState, "white");
+  if (isWhiteInCheck) {
+    document.getElementById(whiteKingChessPosition).classList.add("check");
+  } else {
+    //Remove check CSS if it is not in check
+    const whiteKing = document.getElementById(whiteKingChessPosition)
+    if (whiteKing && whiteKing.classList.contains("check")) {
+      whiteKing.classList.remove("check");
+    }
+  }
+
+  const [isBlackInCheck, blackKingChessPosition] = isInCheck(chessBoardState, "black");
+  if (isBlackInCheck) {
+    document.getElementById(blackKingChessPosition).classList.add("check");
+  } else {
+    //Remove check CSS if it is not in check
+    const blackKing = document.getElementById(blackKingChessPosition);
+    if (blackKing && blackKing.classList.contains("check")) {
+      blackKing.classList.remove("check");
+    }
+  }
+
   return (
     <div>
         <h2>Chess Board:</h2>

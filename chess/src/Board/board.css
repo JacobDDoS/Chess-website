@@ -54,3 +54,7 @@
 .canMoveTo:hover {
     background-color: antiquewhite;
 }
+
+.check {
+    background-color: rgba(238, 27, 27, 0.473);
+}
