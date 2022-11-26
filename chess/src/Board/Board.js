@@ -9,13 +9,11 @@ import { isInCheckmate } from '../helpers/isInCheckmate'
 
 import "./board.css"
 
-const Board = ({isWhitesTurn, setIsWhitesTurn, setIsWhiteCheckmated, setIsBlackCheckmated}) => {
+const Board = ({isWhitesTurn, setIsWhitesTurn, setIsWhiteCheckmated, setIsBlackCheckmated, hasPositionChanged, setHasPositionChanged}) => {
   const startingChessBoardState = useContext(chessBoardContext);
   const [selectedPosition, setSelectedPosition] = useState();
   const [chessBoardState, setChessBoardState] = useState(startingChessBoardState);
   const [positionsSelectedPieceCanMoveTo, setPositionsSelectedPieceCanMoveTo] = useState([]);
-
-  console.log(chessBoardState)
 
   const clearBoardOfClass = (className) => {
     const alpha = "abcdefgh"
@@ -39,7 +37,7 @@ const Board = ({isWhitesTurn, setIsWhitesTurn, setIsWhiteCheckmated, setIsBlackC
       // console.log("selectedPosition: " + selectedPosition);
       document.getElementById(selectedPosition).classList.add("selectedPosition");
 
-      setPositionsSelectedPieceCanMoveTo(findPossibleMovements(chessBoardState, selectedPosition, isWhitesTurn ? "white" : "black"));
+      setPositionsSelectedPieceCanMoveTo(findPossibleMovements(chessBoardState, selectedPosition, isWhitesTurn ? "white" : "black", hasPositionChanged));
     }
   }, [selectedPosition])
 
@@ -81,21 +79,15 @@ const Board = ({isWhitesTurn, setIsWhitesTurn, setIsWhiteCheckmated, setIsBlackC
     document.getElementById(whiteKingChessPosition).classList.add("check");
   } else {
     //Remove check CSS if it is not in check
-    const whiteKing = document.getElementById(whiteKingChessPosition)
-    if (whiteKing && whiteKing.classList.contains("check")) {
-      whiteKing.classList.remove("check");
-    }
+    clearBoardOfClass("check")
   }
 
   const [isBlackInCheck, blackKingChessPosition] = isInCheck(chessBoardState, "black");
   if (isBlackInCheck) {
     document.getElementById(blackKingChessPosition).classList.add("check");
-  } else {
+  } else if (!isWhiteInCheck) {
     //Remove check CSS if it is not in check
-    const blackKing = document.getElementById(blackKingChessPosition);
-    if (blackKing && blackKing.classList.contains("check")) {
-      blackKing.classList.remove("check");
-    }
+    clearBoardOfClass("check");
   }
 
   return (
@@ -117,14 +109,36 @@ const Board = ({isWhitesTurn, setIsWhitesTurn, setIsWhiteCheckmated, setIsBlackC
                                   const chessPos = convertColRowToChessPosition(colIdx, invertRow(rowIdx));
                                   if (posToCheckFor.includes(chessPos)) {
                                     const [prevCol, prevRow] = convertChessPositionToRowCol(selectedPosition);
-                                    // console.log("selectedPosition: " + selectedPosition + " row, col: " + prevRow + ", " + prevCol)
-                                    //Check if it is a valid move - TO DO LATER
+                                    const copyOfPositionState = hasPositionChanged;
 
                                     //Move piece
                                     const copy = chessBoardState[prevRow][prevCol];
                                     const stateOfBoard = chessBoardState;
                                     stateOfBoard[prevRow][prevCol] = 0;
                                     stateOfBoard[rowIdx][colIdx] = copy;
+
+                                    //See if movement was castling, if so move rook as needed
+                                    if (copy.id.endsWith("King")) {
+                                      //See if it moved two right
+                                      if (colIdx-2 === prevCol) {
+                                        //Castled right, so put rook to left
+                                        const copyOfRook = chessBoardState[rowIdx][7];
+                                        stateOfBoard[rowIdx][7] = 0;
+                                        stateOfBoard[rowIdx][colIdx-1] = copyOfRook;
+                                        copyOfPositionState[prevRow][7] = 1;
+                                      } else if (colIdx+2 === prevCol) {
+                                        //Castled left, so put rook to right
+                                        const copyOfRook = chessBoardState[rowIdx][0];
+                                        stateOfBoard[rowIdx][0] = 0;
+                                        stateOfBoard[rowIdx][colIdx+1] = copyOfRook;
+                                        copyOfPositionState[prevRow][0] = 1;
+                                      }
+                                    }
+
+                                    //Record movement (used for castling and potential future statistics)
+                                    copyOfPositionState[prevRow][prevCol] = 1;
+                                    copyOfPositionState[rowIdx][colIdx] = 1;
+                                    setHasPositionChanged(copyOfPositionState);
 
                                     setSelectedPosition("");
                                     setIsWhitesTurn(!isWhitesTurn);

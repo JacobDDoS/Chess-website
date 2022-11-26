@@ -3,6 +3,7 @@ import { convertColRowToChessPosition } from "../helpers/convertColRowToChessPos
 import { invertRow } from "../helpers/invertRow";
 import { isInCheck } from "../helpers/isInCheck";
 import { bishopMovement } from "./Bishop/bishopMovement";
+import { kingMovement } from "./King/kingMovement";
 import { knightMovement } from "./Knight/knightMovement";
 import { blackPawnMovement } from "./Pawn/blackPawnMovement";
 import { whitePawnMovement } from "./Pawn/whitePawnMovement";
@@ -20,7 +21,7 @@ const getMovementsFromRawPositions = (rawPositions) => {
     return movements;
 }
 
-export const findPossibleMovements = (board, position, colorToCheckForChecks="") => {
+export const findPossibleMovements = (board, position, colorToCheckForChecks="", hasPositionChanged=[]) => {
     const [col, row] = convertChessPositionToRowCol(position);
     const pieceAtThatPosition = board[row][col];
     let rawPositions = [];
@@ -73,6 +74,16 @@ export const findPossibleMovements = (board, position, colorToCheckForChecks="")
             rawPositions = queenMovement(board, col, row, "black");
         } else {
             rawPositions = queenMovement(board, col, row, "white");
+        }
+
+    }
+    else if (pieceAtThatPosition && pieceAtThatPosition.id.endsWith("King")) {
+
+        //Kings
+        if (pieceAtThatPosition.color === "white") {
+            rawPositions = kingMovement(board, col, row, "black", hasPositionChanged);
+        } else {
+            rawPositions = kingMovement(board, col, row, "white", hasPositionChanged);
         }
 
     }
