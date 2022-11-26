@@ -5,14 +5,17 @@ import { convertChessPositionToRowCol } from '../helpers/convertChessPositionToR
 import { convertColRowToChessPosition } from '../helpers/convertColRowToChessPosition'
 import { invertRow } from '../helpers/invertRow'
 import { isInCheck } from '../helpers/isInCheck'
+import { isInCheckmate } from '../helpers/isInCheckmate'
 
 import "./board.css"
 
-const Board = ({isWhitesTurn, setIsWhitesTurn}) => {
+const Board = ({isWhitesTurn, setIsWhitesTurn, setIsWhiteCheckmated, setIsBlackCheckmated}) => {
   const startingChessBoardState = useContext(chessBoardContext);
   const [selectedPosition, setSelectedPosition] = useState();
   const [chessBoardState, setChessBoardState] = useState(startingChessBoardState);
   const [positionsSelectedPieceCanMoveTo, setPositionsSelectedPieceCanMoveTo] = useState([]);
+
+  console.log(chessBoardState)
 
   const clearBoardOfClass = (className) => {
     const alpha = "abcdefgh"
@@ -53,6 +56,25 @@ const Board = ({isWhitesTurn, setIsWhitesTurn}) => {
       }
     }
   }, [positionsSelectedPieceCanMoveTo])
+
+
+  useEffect(()=>{
+    //End of turn
+
+    //Check if player is in checkmate
+    if (isInCheckmate(chessBoardState, isWhitesTurn ? "white" : "black")) {
+      if (isWhitesTurn) {
+        setIsWhiteCheckmated(true);
+      } else {
+        setIsBlackCheckmated(true);
+      }
+    }
+  }, [isWhitesTurn])
+
+
+  useEffect(()=>{
+    setChessBoardState(startingChessBoardState);
+  },[startingChessBoardState])
 
   const [isWhiteInCheck, whiteKingChessPosition] = isInCheck(chessBoardState, "white");
   if (isWhiteInCheck) {
