@@ -21,7 +21,7 @@ const getMovementsFromRawPositions = (rawPositions) => {
     return movements;
 }
 
-export const findPossibleMovements = (board, position, colorToCheckForChecks="", hasPositionChanged=[]) => {
+export const findPossibleMovements = (board, position, previousMoveArray, colorToCheckForChecks="", hasPositionChanged=[]) => {
     const [col, row] = convertChessPositionToRowCol(position);
     const pieceAtThatPosition = board[row][col];
     let rawPositions = [];
@@ -31,9 +31,9 @@ export const findPossibleMovements = (board, position, colorToCheckForChecks="",
         
         //Pawns
         if (pieceAtThatPosition.color === "white") {
-            rawPositions = whitePawnMovement(board, col, row);
+            rawPositions = whitePawnMovement(board, col, row, previousMoveArray);
         } else {
-            rawPositions = blackPawnMovement(board, col, row);
+            rawPositions = blackPawnMovement(board, col, row, previousMoveArray);
         }
 
     } 
@@ -81,9 +81,9 @@ export const findPossibleMovements = (board, position, colorToCheckForChecks="",
 
         //Kings
         if (pieceAtThatPosition.color === "white") {
-            rawPositions = kingMovement(board, col, row, "black", hasPositionChanged);
+            rawPositions = kingMovement(board, col, row, "black", hasPositionChanged, previousMoveArray);
         } else {
-            rawPositions = kingMovement(board, col, row, "white", hasPositionChanged);
+            rawPositions = kingMovement(board, col, row, "white", hasPositionChanged, previousMoveArray);
         }
 
     }
@@ -96,8 +96,7 @@ export const findPossibleMovements = (board, position, colorToCheckForChecks="",
             const copyOfPiece = copyOfBoard[row][col];
             copyOfBoard[row][col] = 0;
             copyOfBoard[movement[0]][movement[1]] = copyOfPiece;
-
-            if (isInCheck(copyOfBoard, colorToCheckForChecks)[0]) {
+            if (isInCheck(copyOfBoard, colorToCheckForChecks, previousMoveArray)[0]) {
 
                 //The helper function will see the empty array and ignore it
                 rawPositions[i] = [];

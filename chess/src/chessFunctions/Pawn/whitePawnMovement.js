@@ -1,4 +1,4 @@
-export const whitePawnMovement = (board, col, row) => {
+export const whitePawnMovement = (board, col, row, previousMoveArray) => {
   const positionsItCanGoTo = [];
   // console.log("white pawn at raw position: " + col + " " + row);
   // console.log(board[row][col]);
@@ -26,8 +26,16 @@ export const whitePawnMovement = (board, col, row) => {
 
 
 
-  //En passent (to do later)
+  //En passent
+  //Check left
+  if (col-1>=0 && row-2 >= 0 && previousMoveArray[row][col-1] === 2 && previousMoveArray[row-2][col-1] === 1 && board[row][col-1].id.endsWith("Pawn")) {
+    positionsItCanGoTo.push([row-1, col-1]);
+  }
 
+  //Check right
+  if (col+1<=7 && row-2 >= 0 && previousMoveArray[row][col+1] === 2 && previousMoveArray[row-2][col+1] === 1 && board[row][col+1].id.endsWith("Pawn")) {
+    positionsItCanGoTo.push([row-1, col+1]);
+  }
 
 
   //Note that the logic for promotion will be done on Board.js

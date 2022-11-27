@@ -2,7 +2,7 @@ import { findPossibleMovements } from "../chessFunctions/findPossibleMovements";
 import { convertColRowToChessPosition } from "./convertColRowToChessPosition";
 import { invertRow } from "./invertRow";
 
-export const isInCheck = (board, colorOfKingToCheck) => {
+export const isInCheck = (board, colorOfKingToCheck, previousMoveArray) => {
   //Find position of King
   let rowOfKing, colOfKing;
   for (let i=0;i<8;i++) {
@@ -24,7 +24,7 @@ export const isInCheck = (board, colorOfKingToCheck) => {
     for (let j=0;j<8;j++) {
         const piece = currentRow[j];
         if (piece && piece.color !== colorOfKingToCheck) {
-            const pieceCanMoveTo = [...findPossibleMovements(board, convertColRowToChessPosition(j, invertRow(i)))];
+            const pieceCanMoveTo = [...findPossibleMovements(board, convertColRowToChessPosition(j, invertRow(i)), previousMoveArray)];
             if (pieceCanMoveTo.length > 0) {
                 allPositionsEnemyCanMoveTo.push(...pieceCanMoveTo);
             }

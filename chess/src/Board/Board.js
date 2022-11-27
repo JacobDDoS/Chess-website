@@ -9,7 +9,7 @@ import { isInCheckmate } from '../helpers/isInCheckmate'
 
 import "./board.css"
 
-const Board = ({isWhitesTurn, setIsWhitesTurn, setIsWhiteCheckmated, setIsBlackCheckmated, hasPositionChanged, setHasPositionChanged}) => {
+const Board = ({isWhitesTurn, setIsWhitesTurn, setIsWhiteCheckmated, setIsBlackCheckmated, hasPositionChanged, setHasPositionChanged, previousMoveArray, setPreviousMoveArray}) => {
   const startingChessBoardState = useContext(chessBoardContext);
   const [selectedPosition, setSelectedPosition] = useState();
   const [chessBoardState, setChessBoardState] = useState(startingChessBoardState);
@@ -37,7 +37,7 @@ const Board = ({isWhitesTurn, setIsWhitesTurn, setIsWhiteCheckmated, setIsBlackC
       // console.log("selectedPosition: " + selectedPosition);
       document.getElementById(selectedPosition).classList.add("selectedPosition");
 
-      setPositionsSelectedPieceCanMoveTo(findPossibleMovements(chessBoardState, selectedPosition, isWhitesTurn ? "white" : "black", hasPositionChanged));
+      setPositionsSelectedPieceCanMoveTo(findPossibleMovements(chessBoardState, selectedPosition, previousMoveArray, isWhitesTurn ? "white" : "black", hasPositionChanged));
     }
   }, [selectedPosition])
 
@@ -60,7 +60,7 @@ const Board = ({isWhitesTurn, setIsWhitesTurn, setIsWhiteCheckmated, setIsBlackC
     //End of turn
 
     //Check if player is in checkmate
-    if (isInCheckmate(chessBoardState, isWhitesTurn ? "white" : "black")) {
+    if (isInCheckmate(chessBoardState, isWhitesTurn ? "white" : "black", previousMoveArray)) {
       if (isWhitesTurn) {
         setIsWhiteCheckmated(true);
       } else {
@@ -70,11 +70,12 @@ const Board = ({isWhitesTurn, setIsWhitesTurn, setIsWhiteCheckmated, setIsBlackC
   }, [isWhitesTurn])
 
 
+  //For when a reset occurs, set the state of the board
   useEffect(()=>{
     setChessBoardState(startingChessBoardState);
   },[startingChessBoardState])
 
-  const [isWhiteInCheck, whiteKingChessPosition] = isInCheck(chessBoardState, "white");
+  const [isWhiteInCheck, whiteKingChessPosition] = isInCheck(chessBoardState, "white", previousMoveArray);
   if (isWhiteInCheck) {
     document.getElementById(whiteKingChessPosition).classList.add("check");
   } else {
@@ -82,7 +83,7 @@ const Board = ({isWhitesTurn, setIsWhitesTurn, setIsWhiteCheckmated, setIsBlackC
     clearBoardOfClass("check")
   }
 
-  const [isBlackInCheck, blackKingChessPosition] = isInCheck(chessBoardState, "black");
+  const [isBlackInCheck, blackKingChessPosition] = isInCheck(chessBoardState, "black", previousMoveArray);
   if (isBlackInCheck) {
     document.getElementById(blackKingChessPosition).classList.add("check");
   } else if (!isWhiteInCheck) {
@@ -113,9 +114,29 @@ const Board = ({isWhitesTurn, setIsWhitesTurn, setIsWhiteCheckmated, setIsBlackC
 
                                     //Move piece
                                     const copy = chessBoardState[prevRow][prevCol];
-                                    const stateOfBoard = chessBoardState;
+                                    const stateOfBoard = structuredClone(chessBoardState);
                                     stateOfBoard[prevRow][prevCol] = 0;
                                     stateOfBoard[rowIdx][colIdx] = copy;
+
+                                    //Set movement in previousMoveArray
+                                    const currentMove = [];
+                                    for (let i=0;i<8;i++) {
+                                      const row = [];
+                                      for (let j=0;j<8;j++) {
+                                        row.push(0);
+                                      }
+                                      currentMove.push(row);
+                                    }
+
+                                    currentMove[prevRow][prevCol] = 1;
+                                    currentMove[rowIdx][colIdx] = 2;
+
+                                    setPreviousMoveArray(currentMove);
+
+                                    //See if movement was En passent, if so remove the piece the pawn below it
+                                    if (copy.id.endsWith("Pawn") && colIdx-prevCol !== 0 && chessBoardState[rowIdx][colIdx] === 0) {
+                                      stateOfBoard[rowIdx+ (copy.color==="white" ? 1 : -1)][colIdx] = 0;
+                                    }
 
                                     //See if movement was castling, if so move rook as needed
                                     if (copy.id.endsWith("King")) {
@@ -151,7 +172,7 @@ const Board = ({isWhitesTurn, setIsWhitesTurn, setIsWhiteCheckmated, setIsBlackC
                     >
                       <span></span>
                       {
-                        //Display Pawn
+                        //Display Piece
                         piece && piece.id.endsWith("Pawn") ? <div className='chess-piece'>{piece.color === "white" ? <>♙</> : <>♟︎</>}</div> : 
                         piece && piece.id.endsWith("Rook") ? <div className='chess-piece'>{piece.color === "white" ? <>♖</> : <>♜</>}</div> : 
                         piece && piece.id.endsWith("Queen") ? <div className='chess-piece'>{piece.color === "white" ? <>♕</> : <>♛</>}</div> : 

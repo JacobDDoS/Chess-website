@@ -1,6 +1,6 @@
 import { isInCheck } from "../../helpers/isInCheck";
 
-export const kingMovement = (board, col, row, colorOfEnemy, hasPositionChanged) => {
+export const kingMovement = (board, col, row, colorOfEnemy, hasPositionChanged, previousMoveArray) => {
     const positionsItCanGoTo = [];
     //Diagonals:
 
@@ -63,7 +63,7 @@ export const kingMovement = (board, col, row, colorOfEnemy, hasPositionChanged) 
             }
 
             //See if king is in check
-            if (isInCheck(board, colorOfEnemy === "white" ? "black" : "white")[0]) {
+            if (isInCheck(board, colorOfEnemy === "white" ? "black" : "white", previousMoveArray)[0]) {
                 isGood = false;
             } 
 
@@ -72,14 +72,14 @@ export const kingMovement = (board, col, row, colorOfEnemy, hasPositionChanged) 
             const copyOfKing = copyOfBoard[row][col];
             copyOfBoard[row][col] = 0;
             copyOfBoard[row][col-1] = copyOfKing;
-            if (isInCheck(copyOfBoard, colorOfEnemy === "white" ? "black" : "white")[0]) {
+            if (isInCheck(copyOfBoard, colorOfEnemy === "white" ? "black" : "white", previousMoveArray)[0]) {
                 isGood = false;
             } 
 
             //Check left two
             copyOfBoard[row][col-1] = 0;
             copyOfBoard[row][col-2] = copyOfKing;
-            if (isInCheck(copyOfBoard, colorOfEnemy === "white" ? "black" : "white")[0]) {
+            if (isInCheck(copyOfBoard, colorOfEnemy === "white" ? "black" : "white", previousMoveArray)[0]) {
                 isGood = false;
             }
 
@@ -103,7 +103,7 @@ export const kingMovement = (board, col, row, colorOfEnemy, hasPositionChanged) 
             }
 
             //See if king is in check
-            if (isInCheck(board, colorOfEnemy === "white" ? "black" : "white")[0]) {
+            if (isInCheck(board, colorOfEnemy === "white" ? "black" : "white", previousMoveArray)[0]) {
                 isGood = false;
             } 
 
@@ -112,14 +112,14 @@ export const kingMovement = (board, col, row, colorOfEnemy, hasPositionChanged) 
             const copyOfKing = copyOfBoard[row][col];
             copyOfBoard[row][col] = 0;
             copyOfBoard[row][col+1] = copyOfKing;
-            if (isInCheck(copyOfBoard, colorOfEnemy === "white" ? "black" : "white")[0]) {
+            if (isInCheck(copyOfBoard, colorOfEnemy === "white" ? "black" : "white", previousMoveArray)[0]) {
                 isGood = false;
             } 
 
             //Check right two 
             copyOfBoard[row][col+1] = 0;
             copyOfBoard[row][col+2] = copyOfKing;
-            if (isInCheck(copyOfBoard, colorOfEnemy === "white" ? "black" : "white")[0]) {
+            if (isInCheck(copyOfBoard, colorOfEnemy === "white" ? "black" : "white", previousMoveArray)[0]) {
                 isGood = false;
             }
 

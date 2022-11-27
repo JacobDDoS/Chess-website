@@ -123,13 +123,26 @@ const whiteHPawn = new Piece (1, "White_h_Pawn", "white");
 // ]
 
 //Also for testing castling
+// export const chessBoardStart = [
+//     [0, 0, 0, 0, 0, blackKing, 0, 0],
+//     [0, 0, 0, 0, 0, 0, 0, 0],
+//     [0, 0, 0, 0, 0, 0, 0, 0],
+//     [0, 0, 0, 0, 0, 0, 0, 0],
+//     [0, 0, 0, 0, 0, 0, 0, 0],
+//     [0, 0, 0, 0, 0, 0, 0, 0],
+//     [0, 0, 0, 0, 0, 0, 0, 0],
+//     [0, 0, 0, 0, whiteKing, 0, 0, whiteHRook]
+// ]
+
+
+//For testing En passent
 export const chessBoardStart = [
-    [0, 0, 0, 0, 0, blackKing, 0, 0],
+    [0, 0, 0, 0, blackKing, 0, 0, 0],
+    [0, 0, 0, blackDPawn, 0, blackFPawn, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, whiteEPawn, 0, 0, 0],
+    [0, blackBPawn, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, whiteKing, 0, 0, whiteHRook]
+    [0, 0, whiteCPawn, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, whiteKing, 0, 0, 0]
 ]

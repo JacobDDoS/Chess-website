@@ -3,7 +3,7 @@ import { convertColRowToChessPosition } from "./convertColRowToChessPosition";
 import { invertRow } from "./invertRow";
 import { isInCheck } from "./isInCheck";
 
-export const isInCheckmate = (board, colorOfKingToCheck) => {
+export const isInCheckmate = (board, colorOfKingToCheck, previousMoveArray) => {
   //Find position of King
   let rowOfKing, colOfKing;
   for (let i=0;i<8;i++) {
@@ -24,7 +24,7 @@ export const isInCheckmate = (board, colorOfKingToCheck) => {
     for (let j=0;j<8;j++) {
         const piece = currentRow[j];
         if (piece && piece.color === colorOfKingToCheck) {
-            const pieceCanMoveTo = [...findPossibleMovements(board, convertColRowToChessPosition(j, invertRow(i)), colorOfKingToCheck)];
+            const pieceCanMoveTo = [...findPossibleMovements(board, convertColRowToChessPosition(j, invertRow(i)), previousMoveArray, colorOfKingToCheck)];
             if (pieceCanMoveTo.length > 0) {
                 allPositionsPlayerCanMoveTo.push(...pieceCanMoveTo);
             }
@@ -32,6 +32,6 @@ export const isInCheckmate = (board, colorOfKingToCheck) => {
     }
   }
 
-  return (allPositionsPlayerCanMoveTo.length === 0 && isInCheck(board, colorOfKingToCheck));
+  return (allPositionsPlayerCanMoveTo.length === 0 && isInCheck(board, colorOfKingToCheck, previousMoveArray));
 
 }
