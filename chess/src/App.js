@@ -5,6 +5,8 @@ import { positionsChangedStart } from "./Data/positionsChangedStart.js";
 import { reset } from "./helpers/reset.js";
 import { previousMoveArrayStart } from "./Data/previousMoveArrayStart.js";
 
+import './app.css'
+
 export const chessBoardContext = React.createContext();
 
 function App() {
@@ -16,30 +18,45 @@ function App() {
   const [hasPositionChanged, setHasPositionChanged] = useState(structuredClone(positionsChangedStart));
   const [previousMoveArray, setPreviousMoveArray] = useState(structuredClone(previousMoveArrayStart));
   const [moves, setMoves] = useState([]);
-  
-  return <>
-    <div>
-      <h1>This is App!</h1>
-    </div>
+
+  return <div id="main-container">
     <chessBoardContext.Provider value={chessBoardState}>
       <Board isWhitesTurn={isWhitesTurn} setIsWhitesTurn={setIsWhitesTurn} setIsWhiteCheckmated={setIsWhiteCheckmated} setIsBlackCheckmated={setIsBlackCheckmated}
               hasPositionChanged={hasPositionChanged} setHasPositionChanged={setHasPositionChanged} previousMoveArray={previousMoveArray} 
               setPreviousMoveArray={setPreviousMoveArray} setIsStalemate={setIsStalemate} moves={moves} setMoves={setMoves}
       />
     </chessBoardContext.Provider>
+    <div id="move-container">
+      <div>
+      <h2>♙</h2>
+      {
+        moves.map((move, idx) => {
+          if (!(idx&1)) {
+            return <b className="move" key={`move-${idx}`}>{move}</b>
+          }
+        }) 
+      }
+      </div>
+      <div>
+      <h2>♟︎</h2>
+      {
+        moves.map((move, idx) => {
+          if (idx&1) {
+            return <b className="move" key={`move-${idx}`}>{move}</b>
+          }
+        }) 
+      }
+      </div>
+    </div>
+    <div className={`reset-container ${isWhiteCheckmated || isBlackCheckmated || isStalemate ? null : "invisible" }`}>
     {
       isWhiteCheckmated || isBlackCheckmated || isStalemate ? <button onClick={()=>
         reset({setChessBoardState, setIsWhitesTurn, setIsWhiteCheckmated, setIsBlackCheckmated, setHasPositionChanged, setPreviousMoveArray, setIsStalemate, setMoves})
-      }>Reset</button> : null
-    }
-    <div>
-      {
-        moves.map((move, idx) => {
-          return <p>{move}</p>
-        }) 
       }
+      className="button-22">Reset</button> : null
+    }
     </div>
-  </>;
+  </div>;
 }
 
 export default App;

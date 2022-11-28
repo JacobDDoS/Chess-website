@@ -1,0 +1,26 @@
+#dimmittdome-container {
+    display: none;
+    position: absolute;
+    height: 20px;
+    width: 100vw;
+}
+
+#dimmittdome-container a {
+    text-decoration: none;
+    color: inherit;
+    position: absolute;
+    font-size: 35px;
+    top: 20px;
+    right: 150px;
+}
+
+#dimmittdome-container span {
+    margin: 0px -8px;
+    font-size: 30px;
+}
+
+@media (min-width: 600px) {
+    #dimmittdome-container {
+        display: block;
+    }
+}

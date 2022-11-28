@@ -1,0 +1,82 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgba(0, 0, 0, 0.288);
+}
+
+#main-container {
+    display: grid;
+    grid-template-columns: 1fr calc(50vw - 150px);
+    width: 100vw;
+    height: 100vh;
+}
+
+#main-container > div:nth-child(1) {
+    grid-column: 1 / 2;
+    margin: auto 0px auto auto;
+}
+
+#main-container > div:nth-child(2) {
+    grid-column: 2 / 3;
+    margin: auto auto auto 50px;
+}
+
+#move-container {
+    display: grid;
+    column-gap: 20px;
+    grid-template-columns: 1fr 1fr;
+}
+
+.move {
+    font-size: 1rem;
+    display: block;
+}
+
+.invisible {
+    display: none;
+}
+
+.reset-container {
+    grid-column: 1 / 3;
+}
+
+/* CSS */
+/* Credits to Noor */
+/* Found here: https://getcssscan.com/css-buttons-examples */
+.button-22 {
+  align-items: center;
+  appearance: button;
+  background-color: #0276FF;
+  border-radius: 8px;
+  border-style: none;
+  box-shadow: rgba(255, 255, 255, 0.26) 0 1px 2px inset;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  flex-shrink: 0;
+  font-family: "RM Neue",sans-serif;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: auto;
+  padding: 10px 21px;
+  text-align: center;
+  text-transform: none;
+  transition: color .13s ease-in-out,background .13s ease-in-out,opacity .13s ease-in-out,box-shadow .13s ease-in-out;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-22:active {
+  background-color: #006AE8;
+}
+
+.button-22:hover {
+  background-color: #1C84FF;
+}

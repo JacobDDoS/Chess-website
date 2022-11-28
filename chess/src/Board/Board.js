@@ -99,8 +99,6 @@ const Board = ({isWhitesTurn, setIsWhitesTurn, setIsWhiteCheckmated,
   }
 
   return (
-    <div>
-        <h2>Chess Board:</h2>
         <div id="board">
           {
             chessBoardState.map((row, rowIdx)=> {
@@ -201,7 +199,6 @@ const Board = ({isWhitesTurn, setIsWhitesTurn, setIsWhiteCheckmated,
             })
           }
         </div>
-    </div>
   )
 }
 
