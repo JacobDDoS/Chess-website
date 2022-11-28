@@ -35,7 +35,7 @@ export const addMove = (stateOfBoard, prevRow, prevCol, newRow, newCol, didPiece
     move += "R" + (didPieceTakeAnotherPiece ? "x" : "");
     move += newChessPosition;
   } else if (pieceThatMoved.id.endsWith("Knight")) {
-    move += "K" + (didPieceTakeAnotherPiece ? "x" : "");
+    move += "N" + (didPieceTakeAnotherPiece ? "x" : "");
     move += newChessPosition;
   }
 
