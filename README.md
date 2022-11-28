@@ -16,7 +16,7 @@ A React Project that allows a user to play chess
 
 ### Photo
 ___
-![Screenshot of main page on website](https://user-images.githubusercontent.com/67520166/171050754-0a6d0f67-078c-4cb1-bcc1-f7fc65887995.png)
+![Screenshot of main page on website](https://user-images.githubusercontent.com/67520166/204399576-2b818f09-5007-449f-9535-6a3d4cf83bf5.png)
 ___
 
 ## Improvements
