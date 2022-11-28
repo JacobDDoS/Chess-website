@@ -12,24 +12,33 @@ function App() {
   const [isWhitesTurn, setIsWhitesTurn] = useState(true);
   const [isWhiteCheckmated, setIsWhiteCheckmated] = useState(false);
   const [isBlackCheckmated, setIsBlackCheckmated] = useState(false);
+  const [isStalemate, setIsStalemate] = useState(false);
   const [hasPositionChanged, setHasPositionChanged] = useState(structuredClone(positionsChangedStart));
   const [previousMoveArray, setPreviousMoveArray] = useState(structuredClone(previousMoveArrayStart));
-
-
+  const [moves, setMoves] = useState([]);
+  
   return <>
     <div>
       <h1>This is App!</h1>
     </div>
     <chessBoardContext.Provider value={chessBoardState}>
       <Board isWhitesTurn={isWhitesTurn} setIsWhitesTurn={setIsWhitesTurn} setIsWhiteCheckmated={setIsWhiteCheckmated} setIsBlackCheckmated={setIsBlackCheckmated}
-              hasPositionChanged={hasPositionChanged} setHasPositionChanged={setHasPositionChanged} previousMoveArray={previousMoveArray} setPreviousMoveArray={setPreviousMoveArray}
+              hasPositionChanged={hasPositionChanged} setHasPositionChanged={setHasPositionChanged} previousMoveArray={previousMoveArray} 
+              setPreviousMoveArray={setPreviousMoveArray} setIsStalemate={setIsStalemate} moves={moves} setMoves={setMoves}
       />
     </chessBoardContext.Provider>
     {
-      isWhiteCheckmated || isBlackCheckmated ? <button onClick={()=>
-        reset({setChessBoardState, setIsWhitesTurn, setIsWhiteCheckmated, setIsBlackCheckmated, setHasPositionChanged, setPreviousMoveArray})
+      isWhiteCheckmated || isBlackCheckmated || isStalemate ? <button onClick={()=>
+        reset({setChessBoardState, setIsWhitesTurn, setIsWhiteCheckmated, setIsBlackCheckmated, setHasPositionChanged, setPreviousMoveArray, setIsStalemate, setMoves})
       }>Reset</button> : null
     }
+    <div>
+      {
+        moves.map((move, idx) => {
+          return <p>{move}</p>
+        }) 
+      }
+    </div>
   </>;
 }
 

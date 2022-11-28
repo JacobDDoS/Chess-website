@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { chessBoardContext } from '../App'
 import { findPossibleMovements } from '../chessFunctions/findPossibleMovements'
+import { addMove } from '../helpers/addMove'
+import { canPlayerMove } from '../helpers/canPlayerMove'
 import { convertChessPositionToRowCol } from '../helpers/convertChessPositionToRowCol'
 import { convertColRowToChessPosition } from '../helpers/convertColRowToChessPosition'
 import { handlePromotion } from '../helpers/handlePromotion'
@@ -10,7 +12,9 @@ import { isInCheckmate } from '../helpers/isInCheckmate'
 
 import "./board.css"
 
-const Board = ({isWhitesTurn, setIsWhitesTurn, setIsWhiteCheckmated, setIsBlackCheckmated, hasPositionChanged, setHasPositionChanged, previousMoveArray, setPreviousMoveArray}) => {
+const Board = ({isWhitesTurn, setIsWhitesTurn, setIsWhiteCheckmated, 
+  setIsBlackCheckmated, hasPositionChanged, setHasPositionChanged, previousMoveArray, setPreviousMoveArray, setIsStalemate,
+  moves, setMoves}) => {
   const startingChessBoardState = useContext(chessBoardContext);
   const [selectedPosition, setSelectedPosition] = useState();
   const [chessBoardState, setChessBoardState] = useState(startingChessBoardState);
@@ -67,6 +71,8 @@ const Board = ({isWhitesTurn, setIsWhitesTurn, setIsWhiteCheckmated, setIsBlackC
       } else {
         setIsBlackCheckmated(true);
       }
+    } else if (canPlayerMove(chessBoardState, isWhitesTurn ? "white" : "black", previousMoveArray)) {
+      setIsStalemate(true);
     }
   }, [isWhitesTurn])
 
@@ -117,10 +123,9 @@ const Board = ({isWhitesTurn, setIsWhitesTurn, setIsWhiteCheckmated, setIsBlackC
                                     //Move piece
                                     const copy = chessBoardState[prevRow][prevCol];
                                     const stateOfBoard = structuredClone(chessBoardState);
+                                    const didPieceTakeAnotherPiece = stateOfBoard[rowIdx][colIdx] === 0 ? false : true;
                                     stateOfBoard[prevRow][prevCol] = 0;
                                     stateOfBoard[rowIdx][colIdx] = copy;
-
-                                    
 
                                     //Set movement in previousMoveArray
                                     const currentMove = [];
@@ -173,6 +178,7 @@ const Board = ({isWhitesTurn, setIsWhitesTurn, setIsWhiteCheckmated, setIsBlackC
                                     setSelectedPosition("");
                                     setIsWhitesTurn(!isWhitesTurn);
                                     setChessBoardState([...stateOfBoard]);
+                                    setMoves([...moves, addMove(stateOfBoard, prevRow, prevCol, rowIdx, colIdx, didPieceTakeAnotherPiece, isWhitesTurn ? "black" : "white", previousMoveArray)]);
                                   }
                                   else if (piece && piece.color === (isWhitesTurn ? "white" : "black")) {setSelectedPosition(convertColRowToChessPosition(colIdx, invertRow(rowIdx)));}
                                   else {setSelectedPosition("")}

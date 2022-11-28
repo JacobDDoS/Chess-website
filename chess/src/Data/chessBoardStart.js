@@ -146,3 +146,16 @@ export const chessBoardStart = [
 //     [0, 0, whiteCPawn, 0, 0, 0, 0, 0],
 //     [0, 0, 0, 0, whiteKing, 0, 0, 0]
 // ]
+
+
+//For testing stalemate
+// export const chessBoardStart = [
+//     [blackKing, 0, 0, 0, 0, 0, 0, 0],
+//     [0, 0, 0, 0, 0, 0, whiteHRook, 0],
+//     [0, 0, 0, 0, 0, 0, 0, 0],
+//     [0, whiteARook, 0, 0, 0, 0, 0, 0],
+//     [0, 0, 0, 0, 0, 0, 0, 0],
+//     [0, 0, 0, 0, 0, 0, 0, 0],
+//     [0, 0, 0, 0, 0, 0, 0, 0],
+//     [0, 0, 0, 0, whiteKing, 0, 0, 0]
+// ]
