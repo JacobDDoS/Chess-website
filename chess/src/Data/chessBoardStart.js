@@ -1,4 +1,4 @@
-class Piece {
+export class Piece {
     constructor(logo, id, color) {
         this.logo = logo
         this.id = id
@@ -48,16 +48,16 @@ const whiteGPawn = new Piece (1, "White_g_Pawn", "white");
 const whiteHPawn = new Piece (1, "White_h_Pawn", "white");
 
 
-// export const chessBoardStart = [
-//     [blackARook, blackBKnight, blackWhiteBishop, blackQueen, blackKing, blackBlackBishop, blackGKnight, blackHRook],
-//     [blackAPawn, blackBPawn, blackCPawn, blackDPawn, blackEPawn, blackFPawn, blackGPawn, blackHPawn],
-//     [0, 0, 0, 0, 0, 0, 0, 0],
-//     [0, 0, 0, 0, 0, 0, 0, 0],
-//     [0, 0, 0, 0, 0, 0, 0, 0],
-//     [0, 0, 0, 0, 0, 0, 0, 0],
-//     [whiteAPawn, whiteBPawn, whiteCPawn, whiteDPawn, whiteEPawn, whiteFPawn, whiteGPawn, whiteHPawn],
-//     [whiteARook, whiteBKnight, whiteBlackBishop, whiteQueen, whiteKing, whiteWhiteBishop, whiteGKnight, whiteHRook]
-// ]
+export const chessBoardStart = [
+    [blackARook, blackBKnight, blackWhiteBishop, blackQueen, blackKing, blackBlackBishop, blackGKnight, blackHRook],
+    [blackAPawn, blackBPawn, blackCPawn, blackDPawn, blackEPawn, blackFPawn, blackGPawn, blackHPawn],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [whiteAPawn, whiteBPawn, whiteCPawn, whiteDPawn, whiteEPawn, whiteFPawn, whiteGPawn, whiteHPawn],
+    [whiteARook, whiteBKnight, whiteBlackBishop, whiteQueen, whiteKing, whiteWhiteBishop, whiteGKnight, whiteHRook]
+]
 
 
 // For testing the Knights
@@ -135,14 +135,14 @@ const whiteHPawn = new Piece (1, "White_h_Pawn", "white");
 // ]
 
 
-//For testing En passent
-export const chessBoardStart = [
-    [0, 0, 0, 0, blackKing, 0, 0, 0],
-    [0, 0, 0, blackDPawn, 0, blackFPawn, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, whiteEPawn, 0, 0, 0],
-    [0, blackBPawn, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, whiteCPawn, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, whiteKing, 0, 0, 0]
-]
+//For testing En passent and Promotion
+// export const chessBoardStart = [
+//     [0, 0, 0, 0, blackKing, 0, 0, 0],
+//     [0, 0, 0, blackDPawn, 0, blackFPawn, 0, 0],
+//     [0, 0, 0, 0, 0, 0, 0, 0],
+//     [0, 0, 0, 0, whiteEPawn, 0, 0, 0],
+//     [0, blackBPawn, 0, 0, 0, 0, 0, 0],
+//     [0, 0, 0, 0, 0, 0, 0, 0],
+//     [0, 0, whiteCPawn, 0, 0, 0, 0, 0],
+//     [0, 0, 0, 0, whiteKing, 0, 0, 0]
+// ]

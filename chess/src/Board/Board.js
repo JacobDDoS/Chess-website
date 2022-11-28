@@ -3,6 +3,7 @@ import { chessBoardContext } from '../App'
 import { findPossibleMovements } from '../chessFunctions/findPossibleMovements'
 import { convertChessPositionToRowCol } from '../helpers/convertChessPositionToRowCol'
 import { convertColRowToChessPosition } from '../helpers/convertColRowToChessPosition'
+import { handlePromotion } from '../helpers/handlePromotion'
 import { invertRow } from '../helpers/invertRow'
 import { isInCheck } from '../helpers/isInCheck'
 import { isInCheckmate } from '../helpers/isInCheckmate'
@@ -112,11 +113,14 @@ const Board = ({isWhitesTurn, setIsWhitesTurn, setIsWhiteCheckmated, setIsBlackC
                                     const [prevCol, prevRow] = convertChessPositionToRowCol(selectedPosition);
                                     const copyOfPositionState = hasPositionChanged;
 
+                                    
                                     //Move piece
                                     const copy = chessBoardState[prevRow][prevCol];
                                     const stateOfBoard = structuredClone(chessBoardState);
                                     stateOfBoard[prevRow][prevCol] = 0;
                                     stateOfBoard[rowIdx][colIdx] = copy;
+
+                                    
 
                                     //Set movement in previousMoveArray
                                     const currentMove = [];
@@ -132,6 +136,11 @@ const Board = ({isWhitesTurn, setIsWhitesTurn, setIsWhiteCheckmated, setIsBlackC
                                     currentMove[rowIdx][colIdx] = 2;
 
                                     setPreviousMoveArray(currentMove);
+
+                                    //See if movement is with a pawn and requires a promotion
+                                    if (copy.id.endsWith("Pawn") && (rowIdx===0||rowIdx===7)) {
+                                      handlePromotion(stateOfBoard, rowIdx, colIdx);
+                                    } 
 
                                     //See if movement was En passent, if so remove the piece the pawn below it
                                     if (copy.id.endsWith("Pawn") && colIdx-prevCol !== 0 && chessBoardState[rowIdx][colIdx] === 0) {
@@ -164,7 +173,6 @@ const Board = ({isWhitesTurn, setIsWhitesTurn, setIsWhiteCheckmated, setIsBlackC
                                     setSelectedPosition("");
                                     setIsWhitesTurn(!isWhitesTurn);
                                     setChessBoardState([...stateOfBoard]);
-                                    
                                   }
                                   else if (piece && piece.color === (isWhitesTurn ? "white" : "black")) {setSelectedPosition(convertColRowToChessPosition(colIdx, invertRow(rowIdx)));}
                                   else {setSelectedPosition("")}
