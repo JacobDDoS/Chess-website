@@ -38,10 +38,7 @@ export const whitePawnMovement = (board, col, row, previousMoveArray) => {
     positionsItCanGoTo.push([row-1, col+1]);
   }
 
-
   //Note that the logic for promotion will be done on Board.js
-
-  console.log(previousMoveArray);
 
   return positionsItCanGoTo
 }
